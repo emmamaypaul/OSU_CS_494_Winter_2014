@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="jquery.min.js"></script>
+<script src="jquery.cookie.js"></script>
+<meta charset="UTF-8"/>
+<title>Local Storage and Error Handling</title>
+<script>
+function saveNum(inpt)
+{
+	if (!window["localStorage"]) {
+		alert("Local storage is disabled on the client, attempting to write to cookie instead");	
+		$.cookie("inpt", inpt, {expires: 365});
+		$("#answer").text("Number saved using cookie: " + inpt);
+	} 
+	else {
+		
+		localStorage["userNumber"] = inpt; //under loal storage store input under user number 
+		$("#answer").text("Number Saved in local stoarage: "+localStorage["userNumber"]);
+	}
+}
+function clrNum()
+{
+	if (!window["localStorage"]) {
+		alert("No local storage. Should use cookie instead.");	
+		$.cookie("inpt", null);//http://stackoverflow.com/questions/3671659/jquery-delete-cookies
+		$("#answer").text("Number cleared from cookie");
+	} 
+	else {
+		localStorage.removeItem('userNumber');//http://stackoverflow.com/questions/18695317/how-to-delete-the-individual-item-from-the-localstorage-dynamically
+		$("#answer").text("No number is saved in local storage");
+	}
+}
+function loadNum()
+{
+	if (!window["localStorage"]) {
+		alert("No local storage. Trying to use cookie instead.");
+		var currentNum = $.cookie("inpt");
+		var countAsNumber = parseFloat(localStorage["userNumber"]);
+			if(isNaN(countAsNumber))
+				$("#answer").text("No number found in cookies");
+			else
+			{
+				var total = currentNum * 42; 
+				$.cookie("inpt", total, {expires: 365});//cookie name is "inpt" value given is total
+				$("#answer").text("Answer found using cookie: " + total);
+			}
+		
+	} 
+	else {
+		$("#answer").text("Number loaded in local storage: " + localStorage["userNumber"]);	
+	}
+}
+
+function mulNum()
+{
+	if (!window["localStorage"]) {
+		alert("No local storage. Should use cookie instead.");	
+	} 
+	else {
+		
+		var countAsNumber = parseFloat(localStorage["userNumber"]);
+		if(isNaN(countAsNumber))
+			$("#answer").text("No number found in local storage");
+		else
+		{
+			var total = countAsNumber * 42;
+			localStorage["userNumber"] = total;
+			$("#answer").text(localStorage["userNumber"]);
+		}
+
+	}
+}
+
+</script>
+</head>
+<body>
+<h2>Local Storage and Error Handling</h2>
+<div>
+<input id="inpt" type="text"/>
+<BR>
+<input type="button" onclick="saveNum(inpt.value)" value="Save Number"/>
+<BR>
+<input type="button" onclick="clrNum()" value="Clear Number"/>
+<BR>
+<input type="button" onclick="loadNum()" value="Load Number"/>
+<BR>
+<input type="button" onclick="mulNum()" value="Multiply by 42"/>
+</div>
+<div><h2>Output: </h2>
+<div id="answer"></div>
+</div>
+
+</body>
+</html>

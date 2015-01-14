@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<script src="jquery.min.js"></script>
+<title>Basic Ajax</title>
+<link rel="stylesheet" type="text/css" href="ass2pt2.css"/>
+</head><body>
+
+<script>
+function startAjax(lst) 
+{
+	$.ajax({
+		url: lst, 
+		type:"GET", 
+		dataType:"html",  
+		success:callbackFunction, error:errorFunction});		
+
+
+	function callbackFunction(data)
+	{
+		$("#pageContent").html(data);
+		$("#pageContent").show();	
+	}
+
+	function errorFunction(jqXHR, textStatus, errMsg)
+	{
+		var errNum = jqXHR.status; //gives you error number 
+		var msg1 = "The requested page was: ";
+		var msg2 = "The error number returned was: ";
+		var msg3 = "The error message was: ";
+		$("#pageContent").html(msg1+lst+"<BR>"+msg2+errNum+"<BR>"+msg3+errMsg);
+		$("#pageContent").show();
+	}
+}
+</script>
+
+<h1>Basic Ajax</h1> 
+<div>
+<select name="list" id="lst"> //drop down menu, "lst" is object name 
+	<option value="blank.html">Error Page</option>
+	<option value="http://web.engr.oregonstate.edu/~paule/CS_494_W14/page1ass2pt2.html">Page One</option>
+	<option value="http://web.engr.oregonstate.edu/~paule/CS_494_W14/page2ass2pt2.html">Page Two</option>
+</select>
+<input type="button" value="Display" onclick="startAjax(document.getElementById('lst').value)" />
+</div>
+<h2>Other Page Content:</h2>
+<div id="pageContent" class="bottomPage"></div>
+</body></html>

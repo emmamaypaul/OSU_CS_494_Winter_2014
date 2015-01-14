@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head><title>CS 494 Final Project</title>
+<meta charset="UTF-8">
+<script src="jquery.min.js"></script>
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+
+  <link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.3.0/bootstrap.min.css">
+<style type="text/css">
+      html, body {
+        background-color: black;
+      }
+      body {
+        padding-top: 40px; 
+      }
+      .container {
+        width: 300px;
+      }       
+.container > .content {
+        background-color: orange;
+        padding: 20px;
+        margin: 0 -20px; 
+        -webkit-border-radius: 10px 10px 10px 10px;
+           -moz-border-radius: 10px 10px 10px 10px;
+                border-radius: 10px 10px 10px 10px;
+        -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+           -moz-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+                box-shadow: 0 1px 2px rgba(0,0,0,.15);
+      }
+	   .login-form {
+        margin-left: 65px;
+      }
+
+      legend {
+        margin-right: -50px;
+        font-weight: bold;
+          color: #404040;
+      }
+
+    </style>
+
+</head>
+<body>
+<div class="container">
+    <div class="content">
+      <div class="row">
+        <div class="login-form">
+          <h2>Basketball Stats Login Page</h2>
+			<form method="POST">
+				<fieldset>
+				   <div class="clearfix"></div>
+						<input type="text" placeholder="Username" id="username">
+						<input type="password" placeholder="Password"  id="password"><br>
+						<input type="button" value="Login" onclick="validate()" class="btn btn-primary">
+				</fieldset>
+			</form>
+      </div>
+    </div>
+  </div>
+  </div>
+<br><br>
+ <div class="span7 text-center">
+<form class="form-horizontal" action="http://web.engr.oregonstate.edu/~paule/CS_494_W14/createAccount.html" method="POST">
+<input type="submit" value="Create Account" class="btn btn-success">	
+</form>	</div>
+
+<div id="reportMsg"></div>
+
+<script>
+function validate() 
+{
+
+	var password = $("#password").val();
+	var username = $("#username").val();
+	 var url = "http://web.engr.oregonstate.edu/~paule/CS_494_W14/loginValidate2.php";
+
+	 	$.ajax({
+			 url: url,
+             type:"POST",
+             data:{"username":username, "password":password},
+             success:successFunction, error:errorFunction});
+			 
+			 
+			 function successFunction(data)
+             {      
+				if(data == 'Login Attempt fail. Please try again.')
+				{
+					alert(data);
+				}
+				else
+				{	
+					window.location='http://web.engr.oregonstate.edu/~paule/CS_494_W14/homepage.php';
+				
+				}
+				
+				
+			 }
+			 function errorFunction(jqXHR, textStatus, errMsg)
+			 {
+				var errNum = jqXHR.status; //gives you error number 
+				var msg1 = "The requested page was: ";
+				var msg2 = "The error number returned was: ";
+				var msg3 = "The error message was: ";
+				$("#reportMsg").html(msg1+lst+"<BR>"+msg2+errNum+"<BR>"+msg3+errMsg);
+				$("#reportMsg").show();
+			 }
+			 
+ 
+}
+</script>
+
+</body>
+</html>

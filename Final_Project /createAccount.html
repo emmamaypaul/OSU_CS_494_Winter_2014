@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="jquery.min.js"></script>
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<title>CS 494 Final Project Create Account Page</title>
+<meta charset="UTF-8">
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+
+<link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.3.0/bootstrap.min.css">
+<style type="text/css">
+      html, body {
+        background-color: black;
+      }
+      body {
+        padding-top: 40px; 
+      }
+      .container {
+        width: 300px;
+      }       
+.container > .content {
+        background-color: orange;
+        padding: 20px;
+        margin: 0 -20px; 
+        -webkit-border-radius: 10px 10px 10px 10px;
+           -moz-border-radius: 10px 10px 10px 10px;
+                border-radius: 10px 10px 10px 10px;
+        -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+           -moz-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+                box-shadow: 0 1px 2px rgba(0,0,0,.15);
+      }
+	   .login-form {
+        margin-left: 65px;
+      }
+
+      legend {
+        margin-right: -50px;
+        font-weight: bold;
+          color: orange;
+      }
+
+    </style>
+    </head>
+<body>
+<div class="container">
+    <div class="content">
+      <div class="row">
+        <div class="login-form">
+          <h2>Create Account<br></h2>
+		  <small>Username must be at least 6 characters<br>Password must be at least 4 characters</small>
+			<form method="POST">
+				<fieldset>
+				   <div class="clearfix"></div>
+						<input type="text" placeholder="Username" id="username">
+						<input type="password" placeholder="Password"  id="password"><br>
+						<input type="button" value="Submit" onclick="validate()" class="btn btn-primary">
+				</fieldset>
+			
+<script>
+
+function validate() 
+{
+	
+	var password = $("#password").val();
+	var username = $("#username").val();
+	var minULen= 6;
+	var minPLen = 4; 
+	
+
+	if(username.length < minULen)
+	{
+		$("#reportMsg").text("Username must be at least 6 characters, please re-enter username");
+		
+	}	
+	else if (password.length < minPLen)
+	{
+		$("#reportMsg").text("Password must be at least 4 characters, please re-enter password");
+		
+	}
+	else sendInfo()
+	
+}
+
+
+//http://stackoverflow.com/questions/20127682/checking-username-and-password-with-php-ajax
+  function sendInfo()
+  {
+		
+     var password = $("#password").val();
+    var username = $("#username").val();
+	 var url = "http://web.engr.oregonstate.edu/~paule/CS_494_W14/phpValidate2.php";
+     
+         $.ajax(
+         {
+             url: url,
+             type:"POST",
+             data:{"username":username, "password":password},
+             success:successFunction, error:errorFunction});
+			 
+			 
+			 function successFunction(data)
+             {      
+				alert(data);
+             }
+			 
+			 function errorFunction(jqXHR, textStatus, errMsg)
+			 {
+				var errNum = jqXHR.status; //gives you error number 
+				var msg1 = "The requested page was: ";
+				var msg2 = "The error number returned was: ";
+				var msg3 = "The error message was: ";
+				$("#reportMsg").html(msg1+lst+"<BR>"+msg2+errNum+"<BR>"+msg3+errMsg);
+				$("#reportMsg").show();
+		 }
+		
+	
+	}
+</script>
+</form>
+		
+      </div>
+    </div>
+  </div>
+  </div>
+<br>
+<div id="reportMsg"></div>
+
+<br><br>
+<br><br>
+ <div class="span7 text-center">
+<form class="form-horizontal" action="http://web.engr.oregonstate.edu/~paule/CS_494_W14/Final_Project.html" method="POST">
+<input type="submit" value="Login Page" class="btn btn-success">
+</form>	</div>
+
+</body>
+</html>
