@@ -9,7 +9,7 @@ if(!(isset($_SESSION['username'])))
 		$username =  $_SESSION['username'];
 		
 //Connects to the database
-$mysqli = new mysqli("oniddb.cws.oregonstate.edu","paule-db","nOpoDr2G8grzrWxj","paule-db");
+$mysqli = new mysqli("oniddb.cws.oregonstate.edu","paule-db","XXXXXXXXXXX","paule-db");
 if($mysqli->connect_errno){
 	echo "Connection error " . $mysqli->connect_errno . " " . $mysqli->connect_error;
 	}
