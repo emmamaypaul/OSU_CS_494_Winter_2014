@@ -16,7 +16,7 @@
 ini_set('display_errors', 'On');//checks errors
 
 //new instance of mysqli class giving host name, database name, user name, and password 
-$mysqli = new mysqli("oniddb.cws.oregonstate.edu","paule-db","nOpoDr2G8grzrWxj","paule-db");
+$mysqli = new mysqli("oniddb.cws.oregonstate.edu","paule-db","XXXXXXXXXXX","paule-db");
 	if(!$mysqli || $mysqli->connect_errno) //if if mysqli doesn't exist or if there is a connection error
 	{ 
 		echo "Connection error ".$mysqli->connect_errno. " " .$mysqli->connect_error;
