@@ -10,3 +10,5 @@ Math project demonstrates using javascript to do math on user input. To see math
 Project 2 demonstrates showing other web page content (basic ajax). To see Project 2 visit http://web.engr.oregonstate.edu/~paule/CS_494_W14/ass2pt2.html 
 
 Project 3 demonstrates adding into to a database through a webpage. To see Project 3 visit http://web.engr.oregonstate.edu/~paule/CS_494_W14/ass3notes.php
+
+Note: the password for the database has been changed to "XXXXXXXXXXX" 
